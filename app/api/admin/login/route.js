@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { codeOk, token, isAdmin } from '../../../../lib/auth';
 
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 export async function GET() {
   return NextResponse.json({ admin: isAdmin() });

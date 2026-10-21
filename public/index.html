@@ -151,7 +151,7 @@ function openM(m){var u=imgUrl(m);var mi=$("mimg");if(u){mi.src=u;mi.style.displ
 function closeAll(){$("mov").classList.remove("open");$("aov").classList.remove("open")}
 $("mx").onclick=$("ax").onclick=closeAll;
 [$("mov"),$("aov")].forEach(function(o){o.addEventListener("click",function(e){if(e.target===o)closeAll()})});
-async function api(u,o){var r=await fetch(u,o),j={};try{j=await r.json()}catch(e){}if(!r.ok)throw new Error(j.error||("Request failed ("+r.status+")"));return j}
+async function api(u,o){o=o||{};o.cache="no-store";var r=await fetch(u,o),j={};try{j=await r.json()}catch(e){}if(!r.ok)throw new Error(j.error||("Request failed ("+r.status+")"));return j}
 async function load(){try{methods=(await api("/api/methods")).methods||[]}catch(e){methods=[]}render()}
 load();setTimeout(function(){grid.classList.add("ready")},1800);
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeAll();if(e.shiftKey&&e.key==="F8"){e.preventDefault();openAdmin()}});
