@@ -1,5 +1,4 @@
-module.exports = {
-  async rewrites() {
-    return { beforeFiles: [{ source: '/', destination: '/index.html' }] };
-  },
-};
+/** @type {import('next').NextConfig} */
+const nextConfig = {}
+
+module.exports = nextConfig

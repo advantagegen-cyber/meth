@@ -1,2 +1,11 @@
-import { redirect } from 'next/navigation';
-export default function Page() { redirect('/index.html'); }
+export default function Page() {
+  return (
+    <main style={{ minHeight: '100vh', background: '#000' }}>
+      <iframe
+        title="Meth Hub"
+        src="/site"
+        style={{ display: 'block', width: '100%', minHeight: '100vh', border: 0 }}
+      />
+    </main>
+  )
+}
