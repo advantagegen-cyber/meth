@@ -155,10 +155,11 @@ async function api(u,o){o=o||{};o.cache="no-store";var r=await fetch(u,o),j={};t
 async function load(){try{methods=(await api("/api/methods")).methods||[]}catch(e){methods=[]}render()}
 load();setTimeout(function(){grid.classList.add("ready")},1800);
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeAll();if(e.shiftKey&&e.key==="F8"){e.preventDefault();openAdmin()}});
-async function openAdmin(){$("aov").classList.add("open");try{if((await api("/api/admin/login")).admin){showPanel();return}}catch(e){}
+var ADMIN_LOGIN_API="/api/admin/login?v=2";
+async function openAdmin(){$("aov").classList.add("open");try{if((await api(ADMIN_LOGIN_API)).admin){showPanel();return}}catch(e){}
 if($("panel").hidden)setTimeout(function(){$("pw").focus()},50)}
 function showPanel(){$("gate").hidden=true;$("panel").hidden=false;renderList()}
-async function unlock(){try{await api("/api/admin/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code:$("pw").value})});$("pw").value="";$("gmsg").textContent="";showPanel()}catch(e){$("gmsg").textContent=e.message;$("pw").select()}}
+async function unlock(){try{await api(ADMIN_LOGIN_API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code:$("pw").value})});$("pw").value="";$("gmsg").textContent="";showPanel()}catch(e){$("gmsg").textContent=e.message;$("pw").select()}}
 $("unlock").onclick=unlock;$("pw").addEventListener("keydown",function(e){if(e.key==="Enter")unlock()});
 function renderList(){var l=$("list");l.textContent="";if(!methods.length){l.appendChild(h("p","msg","No methods yet."));return}
 methods.forEach(function(m){var r=h("div","row");r.appendChild(h("span",0,m.title));var d=h("button","btn red","Delete"),armed=0,tm;d.type="button";d.onclick=async function(){var lm=$("lmsg");
