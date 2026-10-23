@@ -155,7 +155,7 @@ async function api(u,o){o=o||{};o.cache="no-store";var r=await fetch(u,o),j={};t
 async function load(){try{methods=(await api("/api/methods")).methods||[]}catch(e){methods=[]}render()}
 load();setTimeout(function(){grid.classList.add("ready")},1800);
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeAll();if(e.shiftKey&&e.key==="F8"){e.preventDefault();openAdmin()}});
-var ADMIN_LOGIN_API="/api/admin/login?v=2";
+var ADMIN_LOGIN_API="/api/admin/login";
 async function openAdmin(){$("aov").classList.add("open");try{if((await api(ADMIN_LOGIN_API)).admin){showPanel();return}}catch(e){}
 if($("panel").hidden)setTimeout(function(){$("pw").focus()},50)}
 function showPanel(){$("gate").hidden=true;$("panel").hidden=false;renderList()}
